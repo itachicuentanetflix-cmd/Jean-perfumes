@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # JEAN PERFUMES — Vercel + Neon
 
 Estructura: `public/index.html` (interfaz) · `api/rpc.js` (servidor) · `schema.sql` (tablas) · `package.json` · `vercel.json`.
@@ -24,3 +25,6 @@ Estructura: `public/index.html` (interfaz) · `api/rpc.js` (servidor) · `schema
 - Venta: bloqueo de lote, validación de stock, clave de idempotencia y transacción.
 - Sin integración oficial con Shalom: el recibo es un documento interno.
 - Pendiente: devoluciones parciales, pagos a proveedores, caja, Excel/PDF de reportes, respaldos (usa las ramas/restauración de Neon).
+=======
+# Jean-perfumes
+>>>>>>> 9ce091b5eb0df3373d92e6f3ad362c6e1fbcfa68
