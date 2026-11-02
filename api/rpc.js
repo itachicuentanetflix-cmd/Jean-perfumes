@@ -66,11 +66,11 @@ const A = {
   },
   async load() {
     const [s, p, l, v] = await Promise.all([
-      q('select * from suppliers order by name'), q('select * from perfumes order by name'),
+      q('select * from suppliers order by name'), q('select * from perfumes order by lower(name), ml'),
       q('select * from lots order by created_at'), q('select * from sales order by at desc limit 1000')]);
     return {
       sup: s.rows.map((x) => ({ id: x.id, name: x.name, country: x.country, contact: x.contact, active: x.active })),
-      per: p.rows.map((x) => ({ id: x.id, sku: x.sku, name: x.name, brand: x.brand, price: x.price, min: x.min_stock, active: x.active, hist: x.hist })),
+      per: p.rows.map((x) => ({ id: x.id, sku: x.sku, name: x.name, ml: x.ml, brand: x.brand, price: x.price, min: x.min_stock, active: x.active, hist: x.hist })),
       lot: l.rows.map((x) => ({ id: x.id, per: x.perfume_id, sup: x.supplier_id, qty: x.qty, avail: x.avail, buy: x.buy, cus: x.cus, sha: x.sha,
         bcp: x.bcp, oth: x.oth, prov: x.prov, rec: x.rec, ref: x.ref, fx: x.fx == null ? null : +x.fx, date: +new Date(x.created_at) })),
       sale: v.rows.map((x) => ({ id: x.code, code: x.code, at: +new Date(x.at), cust: x.cust, pay: x.pay, items: x.items, total: x.total,
@@ -85,13 +85,13 @@ const A = {
   async savePer({ per: p }, u) {
     const name = String(p?.name || '').trim(), sku = String(p?.sku || '').trim();
     if (!name || !sku) throw new E('Falta nombre o código');
-    const price = Math.max(0, int(p.price)), min = Math.max(0, int(p.min, 3));
+    const ml = p.ml ? Math.max(0, int(p.ml)) : null, price = Math.max(0, int(p.price)), min = Math.max(0, int(p.min, 3));
     if (p.id) {
-      await q(`update perfumes set name=$2,brand=$3,sku=$4,price=$5,min_stock=$6,active=$7,
+      await q(`update perfumes set name=$2,brand=$3,sku=$4,price=$5,min_stock=$6,active=$7,ml=$8,
         hist=case when price<>$5 then hist||jsonb_build_array(jsonb_build_object('old',price,'new',$5::int,'at',(extract(epoch from now())*1000)::bigint)) else hist end
-        where id=$1`, [p.id, name, p.brand || null, sku, price, min, p.active !== false]);
+        where id=$1`, [p.id, name, p.brand || null, sku, price, min, p.active !== false, ml]);
     } else {
-      await q('insert into perfumes(name,brand,sku,price,min_stock) values($1,$2,$3,$4,$5)', [name, p.brand || null, sku, price, min]);
+      await q('insert into perfumes(name,brand,sku,price,min_stock,ml) values($1,$2,$3,$4,$5,$6)', [name, p.brand || null, sku, price, min, ml]);
     }
     return { ok: true };
   },
@@ -127,14 +127,14 @@ const A = {
       if (!ls.length) throw new E('Venta vacía');
       const items = []; let total = 0, cost = 0, below = false;
       for (const i of ls) {
-        const l = (await c.query('select l.*,p.name,p.price from lots l join perfumes p on p.id=l.perfume_id where l.id=$1 for update of l', [i.lot])).rows[0];
+        const l = (await c.query('select l.*,p.name,p.ml,p.price from lots l join perfumes p on p.id=l.perfume_id where l.id=$1 for update of l', [i.lot])).rows[0];
         if (!l || !l.rec) throw new E('Lote no disponible');
         const qty = int(i.qty); if (l.avail < qty) throw new E(`Stock insuficiente (${l.avail} disponibles)`);
         const price = int(i.price); if (price <= 0) throw new E('Falta el precio');
         const uc = Math.round((l.buy + l.cus + l.sha + l.bcp + l.oth) / l.qty);
         if (price < uc) { if (!b.belowOk) throw new E('Precio menor al costo: requiere confirmación'); below = true; }
         await c.query('update lots set avail=avail-$2 where id=$1', [l.id, qty]);
-        items.push({ lot: l.id, per: l.perfume_id, name: l.name, qty, price, rec: l.price || 0, cost: uc });
+        items.push({ lot: l.id, per: l.perfume_id, name: l.name + (l.ml ? ` ${l.ml} ml` : ''), qty, price, rec: l.price || 0, cost: uc });
         total += price * qty; cost += uc * qty;
       }
       const paid = b.paid == null || b.paid === '' ? total : Math.max(0, Math.min(int(b.paid), total));
