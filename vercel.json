@@ -1,0 +1,1 @@
+{ "regions": ["gru1"], "functions": { "api/rpc.js": { "maxDuration": 15 } } }

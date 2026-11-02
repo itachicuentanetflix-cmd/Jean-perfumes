@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JEAN PERFUMES</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4f0;--sf:#fff;--tx:#17150f;--mu:#6f6a5e;--bd:#e4dfd3;--gold:#b08d3e;--ink:#14120d;--ok:#1e8a4c;--wn:#c47a0a;--er:#c0392b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0e0d0a;--sf:#181611;--tx:#f2eee4;--mu:#9d9786;--bd:#2d2a21;--gold:#d4af5f;--ink:#000;--ok:#4cc27e;--wn:#e8a23a;--er:#ef6f60}}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--tx);font:14px/1.5 Inter,system-ui,sans-serif}
+h1,h2,.brand{font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:.04em}
+#login{min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 30% 20%,#2a2415,#0a0907);padding:20px}
+.lc{background:#14120d;border:1px solid #3a3322;border-radius:18px;padding:40px 32px;width:100%;max-width:360px;text-align:center;color:#f2eee4}
+.lc .brand{font-size:34px;color:#d4af5f;margin:0}.lc small{color:#9d9786;letter-spacing:.3em;font-size:10px}
+.lc input{width:100%;margin-top:12px;padding:12px;background:#0a0907;border:1px solid #3a3322;border-radius:10px;color:#f2eee4}
+#app{display:none;min-height:100vh}.side{position:fixed;inset:0 auto 0 0;width:220px;background:var(--ink);color:#e9e4d6;padding:24px 14px;display:flex;flex-direction:column;gap:4px}
+.side .brand{font-size:24px;color:#d4af5f;text-align:center;margin-bottom:2px}.side small{text-align:center;color:#8c8570;letter-spacing:.3em;font-size:9px;margin-bottom:18px}
+.side button{all:unset;cursor:pointer;padding:10px 14px;border-radius:10px;color:#bdb6a2}.side button:hover{background:#25221a}.side button.on{background:#d4af5f;color:#14120d;font-weight:600}
+main{margin-left:220px;padding:28px;max-width:1200px}
+h2{font-size:30px;margin:0 0 18px;font-weight:600}.grid{display:grid;gap:14px}.k{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:18px;overflow-x:auto}
+.kpi small{color:var(--mu);text-transform:uppercase;letter-spacing:.08em;font-size:11px}.kpi b{display:block;font:600 26px 'Cormorant Garamond',serif;margin-top:4px}
+table{width:100%;border-collapse:collapse}th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);padding:8px;border-bottom:1px solid var(--bd)}td{padding:9px 8px;border-bottom:1px solid var(--bd);white-space:nowrap}
+input,select{padding:9px 10px;border:1px solid var(--bd);border-radius:9px;background:var(--bg);color:var(--tx);font:inherit;min-width:0}
+.btn{background:var(--ink);color:#d4af5f;border:1px solid var(--gold);padding:10px 18px;border-radius:10px;cursor:pointer;font:600 13px Inter}.btn:hover{filter:brightness(1.2)}.btn.g{background:transparent;color:var(--tx);border-color:var(--bd)}.btn:disabled{opacity:.5}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0}.row>*{flex:1 1 130px}
+.chip{display:inline-block;padding:2px 10px;border-radius:99px;font-size:11px;font-weight:600}.ok{background:#1e8a4c22;color:var(--ok)}.wn{background:#c47a0a22;color:var(--wn)}.er{background:#c0392b22;color:var(--er)}
+.res{font:600 18px 'Cormorant Garamond',serif;padding:10px 14px;border-radius:10px;margin-top:8px}
+.modal{position:fixed;inset:0;background:#000a;display:grid;place-items:center;padding:16px;z-index:9}.paper{background:#fff;color:#111;width:100%;max-width:380px;max-height:92vh;overflow:auto;padding:26px;border-radius:6px;font-family:Inter}
+.paper h3{font:600 28px 'Cormorant Garamond',serif;text-align:center;margin:0;letter-spacing:.1em}.paper hr{border:0;border-top:1px dashed #bbb}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#d4af5f;padding:10px 20px;border-radius:99px;display:none;z-index:99}
+@media(max-width:800px){.side{position:static;width:auto;flex-direction:row;overflow-x:auto;padding:10px}.side .brand,.side small{display:none}.side button{white-space:nowrap}main{margin:0;padding:16px}}
+@media print{body *{visibility:hidden}.paper,.paper *{visibility:visible}.paper{position:absolute;inset:0;max-width:none}.noprint{display:none!important}}
+</style></head><body>
+<div id="login"><div class="lc"><p class="brand">JEAN PERFUMES</p><small>SISTEMA PRIVADO</small>
+<input id="u" placeholder="Usuario" autocomplete="username"><input id="p" type="password" placeholder="Contraseña" autocomplete="current-password">
+<p id="le" style="color:#ef6f60;min-height:20px;margin:10px 0 0"></p><button class="btn" style="width:100%" id="lb">Ingresar</button></div></div>
+<div id="app"><nav class="side"><div class="brand">JEAN PERFUMES</div><small>ADMINISTRACIÓN</small><div id="nav" style="display:contents"></div></nav><main id="m"></main></div>
+<div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const S={sup:[],per:[],lot:[],sale:[],cfg:{}};let DB=null,view='dash',tries=0,lock=0;
+const cents=v=>Math.round(parseFloat(v||0)*100),pen=c=>'S/ '+(c/100).toLocaleString('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fd=t=>new Date(t).toLocaleString('es-PE',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+const toast=m=>{const t=$('#toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2600)};
+const sha=async s=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode('jp:'+s)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+/* ---- servidor (Vercel + Neon) ---- */
+const api=async(a,d={})=>{const r=await fetch('/api/rpc',{method:'POST',headers:{'Content-Type':'application/json','X-Requested-With':'jp'},body:JSON.stringify({a,...d})});let j={};try{j=await r.json()}catch{}
+ if(r.status===401&&a!=='login'&&a!=='me'){location.reload();throw new Error('Sesión expirada')}if(!r.ok)throw new Error(j.error||'Error del servidor');return j};
+async function load(){const j=await api('load');S.sup=j.sup;S.per=j.per;S.lot=j.lot;S.sale=j.sale;render()}
+async function run(a,d,msg){try{const j=await api(a,d);await load();if(msg)toast(msg);return j}catch(e){toast(e.message);throw e}}
+const getAuth=()=>null;
+function enter(must){$('#login').style.display='none';$('#app').style.display='block';if(must)view='cfg',toast('Cambia tu contraseña inicial');render()}
+async function init(){DB=true;try{const m=await api('me');if(m.ok){await load();enter(m.must)}}catch{}}
+async function login(){try{const j=await api('login',{user:$('#u').value.trim(),pass:$('#p').value});await load();enter(j.must)}catch(e){$('#le').textContent=e.message}}
+$('#lb').onclick=login;$('#p').onkeydown=e=>e.key==='Enter'&&login();
+/* ---- cálculos ---- */
+function alloc(total,w){const sum=w.reduce((a,b)=>a+b,0);if(!sum||!total)return w.map(()=>0);const raw=w.map(x=>total*x/sum),fl=raw.map(Math.floor);let r=total-fl.reduce((a,b)=>a+b,0);
+ raw.map((x,i)=>[i,x-fl[i]]).sort((a,b)=>b[1]-a[1]).forEach(([i])=>{if(r>0){fl[i]++;r--}});return fl}
+const uc=l=>Math.round((l.buy+l.cus+l.sha+l.bcp+l.oth)/l.qty);
+const tp=p=>S.per.find(x=>x.id==p)||{},ts=s=>S.sup.find(x=>x.id==s)||{name:'—'};
+const avail=l=>l.rec?l.avail:0;
+const NAV=[['dash','Panel'],['inv','Inventario'],['sell','Vender'],['hist','Historial'],['buy','Compras'],['cat','Catálogo'],['sup','Proveedores'],['rep','Reportes'],['cfg','Ajustes']];
+let draft={lines:[{}]},cart=[{}];
+function render(){if($('#app').style.display!=='block')return;if(document.activeElement&&/INPUT|SELECT/.test(document.activeElement.tagName)&&document.activeElement.dataset.keep)return;
+ $('#nav').innerHTML=NAV.map(([k,n])=>`<button class="${k==view?'on':''}" onclick="view='${k}';render()">${n}</button>`).join('');
+ $('#m').innerHTML=({dash,inv,sell,hist,buy,cat,sup,rep,cfg})[view]()}
+const sold=s=>s.status!=='void';
+function dash(){const t=new Date().toDateString(),ss=S.sale.filter(sold),day=ss.filter(s=>new Date(s.at).toDateString()===t);
+ const sum=(a,f)=>a.reduce((x,s)=>x+f(s),0),stock=S.lot.reduce((x,l)=>x+avail(l)*uc(l),0),units=S.lot.reduce((x,l)=>x+avail(l),0);
+ const low=S.per.filter(p=>p.active!==false&&S.lot.filter(l=>l.per==p.id).reduce((x,l)=>x+avail(l),0)<=(p.min??3));
+ const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return{l:d.toLocaleDateString('es-PE',{weekday:'short'}),v:sum(ss.filter(s=>new Date(s.at).toDateString()===d.toDateString()),s=>s.total)}});
+ const mx=Math.max(1,...days.map(d=>d.v));
+ return`<h2>Panel</h2><div class="grid k">${[['Ventas hoy',pen(sum(day,s=>s.total))],['Cobrado total',pen(sum(ss,s=>s.paid))],['Ganancia bruta',pen(sum(ss,s=>s.profit))],['Unidades vendidas',sum(ss,s=>s.items.reduce((a,i)=>a+i.qty,0))],['Unidades en stock',units],['Inventario al costo',pen(stock)],['Por cobrar',pen(sum(ss,s=>s.total-s.paid))],['Stock bajo / agotado',low.length]].map(([a,b])=>`<div class="card kpi"><small>${a}</small><b>${b}</b></div>`).join('')}</div>
+ <div class="card" style="margin-top:14px"><b>Ventas últimos 7 días</b><svg viewBox="0 0 350 140" style="width:100%;max-height:220px;margin-top:10px">${days.map((d,i)=>{const h=d.v/mx*100;return`<g><rect x="${i*50+8}" y="${110-h}" width="34" height="${h}" rx="5" fill="var(--gold)"><title>${d.l}: ${pen(d.v)}</title></rect><text x="${i*50+25}" y="128" text-anchor="middle" font-size="10" fill="var(--mu)">${d.l}</text></g>`}).join('')}</svg></div>
+ ${low.length?`<div class="card" style="margin-top:14px"><b>Alertas de stock</b>${low.map(p=>{const n=S.lot.filter(l=>l.per==p.id).reduce((x,l)=>x+avail(l),0);return`<p>${esc(p.name)} — <span class="chip ${n?'wn':'er'}">${n?n+' unidades':'Agotado'}</span></p>`}).join('')}</div>`:''}
+ <p style="color:var(--mu);margin-top:14px">Datos guardados en Neon (PostgreSQL).</p>`}
+function inv(){const rows=S.lot.map(l=>{const p=tp(l.per),a=avail(l),u=uc(l),mg=p.price?(p.price-u)/p.price*100:null;
+ const st=!l.rec?['Pedido en tránsito','wn']:a==0?['Agotado','er']:a<=(p.min??3)?['Stock bajo','wn']:['Disponible','ok'];
+ return`<tr><td><b>${esc(p.name)}</b><br><small>${esc(p.brand)}</small></td><td>${esc(ts(l.sup).name)}</td><td>${a} / ${l.qty}</td><td>${pen(u)}${l.prov?' <span class="chip wn">provisional</span>':''}</td><td>${p.price?pen(p.price):'—'}</td><td>${mg==null?'—':mg.toFixed(0)+'%'}</td><td><span class="chip ${st[1]}">${st[0]}</span> ${!l.rec?`<button class="btn g" onclick="recv('${l.id}')">Recibir</button>`:''}</td></tr>`}).join('');
+ return`<h2>Inventario</h2><div class="card"><input data-keep placeholder="Buscar perfume…" oninput="fl(this.value)" style="width:100%;margin-bottom:10px"><table id="it"><tr><th>Perfume</th><th>Proveedor</th><th>Stock</th><th>Costo real</th><th>Precio rec.</th><th>Margen</th><th>Estado</th></tr>${rows||'<tr><td colspan=7>Sin lotes. Registra una compra.</td></tr>'}</table></div>`}
+function fl(q){q=q.toLowerCase();document.querySelectorAll('#it tr:not(:first-child)').forEach(r=>r.style.display=r.textContent.toLowerCase().includes(q)?'':'none')}
+async function recv(id){await run('recv',{id},'Recepción registrada: stock disponible')}
+/* ---- compras ---- */
+function calc(){const d=draft,fx=parseFloat(d.fx)||0,L=d.lines.filter(l=>l.per&&l.qty>0&&l.usd>0),w=L.map(l=>Math.round(l.qty*l.usd*100)),buy=L.map(l=>Math.round(l.qty*l.usd*fx*100));
+ const c=alloc(cents(d.cus),w),b=alloc(cents(d.bcp),w),o=alloc(cents(d.oth),w),sh=alloc(cents(d.sha),d.meth=='units'?L.map(l=>+l.qty):w);
+ return L.map((l,i)=>({per:l.per,qty:+l.qty,buy:buy[i],cus:c[i],sha:sh[i],bcp:b[i],oth:o[i],prov:!fx}))}
+function buy(){const d=draft,rows=calc();return`<h2>Compras internacionales</h2><div class="card"><div class="row"><select data-keep onchange="draft.sup=this.value"><option value="">Proveedor…</option>${S.sup.map(s=>`<option value="${s.id}" ${draft.sup==s.id?'selected':''}>${esc(s.name)}</option>`).join('')}</select>
+ <input data-keep placeholder="Referencia pedido" value="${esc(d.ref)}" onchange="draft.ref=this.value"><input data-keep type="number" step="0.0001" placeholder="Tipo de cambio S/ por USD" value="${d.fx??''}" onchange="draft.fx=this.value;render()"></div>
+ <div class="row"><input data-keep type="number" step="0.01" placeholder="Desaduanaje S/" value="${d.cus??''}" onchange="draft.cus=this.value;render()"><input data-keep type="number" step="0.01" placeholder="Shalom S/" value="${d.sha??''}" onchange="draft.sha=this.value;render()"><input data-keep type="number" step="0.01" placeholder="Comisión BCP S/" value="${d.bcp??''}" onchange="draft.bcp=this.value;render()"><input data-keep type="number" step="0.01" placeholder="Otros gastos S/" value="${d.oth??''}" onchange="draft.oth=this.value;render()">
+ <select data-keep onchange="draft.meth=this.value;render()"><option value="value">Shalom: por valor</option><option value="units" ${d.meth=='units'?'selected':''}>Shalom: por unidades</option></select></div>
+ <h3 style="margin:14px 0 4px">Contenido de la caja</h3>${d.lines.map((l,i)=>`<div class="row"><select data-keep onchange="draft.lines[${i}].per=this.value;render()"><option value="">Perfume…</option>${S.per.map(p=>`<option value="${p.id}" ${l.per==p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select><input data-keep type="number" min="1" placeholder="Cant." value="${l.qty??''}" onchange="draft.lines[${i}].qty=this.value;render()"><input data-keep type="number" step="0.01" placeholder="USD unit." value="${l.usd??''}" onchange="draft.lines[${i}].usd=this.value;render()"></div>`).join('')}
+ <button class="btn g" onclick="draft.lines.push({});render()">+ Añadir línea</button></div>
+ ${rows.length?`<div class="card" style="margin-top:14px"><b>Costo real calculado</b><table><tr><th>Perfume</th><th>Cant.</th><th>Compra</th><th>Desaduanaje</th><th>Shalom</th><th>BCP</th><th>Otros</th><th>Costo unit.</th></tr>${rows.map(r=>`<tr><td>${esc(tp(r.per).name)}</td><td>${r.qty}</td><td>${pen(r.buy)}</td><td>${pen(r.cus)}</td><td>${pen(r.sha)}</td><td>${pen(r.bcp)}</td><td>${pen(r.oth)}</td><td><b>${pen(uc(r))}</b></td></tr>`).join('')}</table>
+ <p style="color:var(--mu)">Desaduanaje repartido: ${pen(rows.reduce((a,r)=>a+r.cus,0))} (coincide con el gasto registrado).${rows[0].prov?' <span class="chip wn">Costo provisional: falta tipo de cambio</span>':''}</p>
+ <div class="row"><select id="rcv"><option value="1">Ya recibida (entra al stock)</option><option value="0">En tránsito (aún no es stock)</option></select><button class="btn" onclick="regBuy()">Registrar compra</button></div></div>`:''}`}
+async function regBuy(){const d=draft;if(!d.sup)return toast('Elige un proveedor');await run('buy',{sup:d.sup,ref:d.ref||'',fx:d.fx,rec:$('#rcv').value=='1',cus:cents(d.cus),sha:cents(d.sha),bcp:cents(d.bcp),oth:cents(d.oth),meth:d.meth,lines:d.lines},'Compra registrada');draft={lines:[{}]};view='inv';render()}
+/* ---- catálogo y proveedores ---- */
+function cat(){return`<h2>Catálogo de perfumes</h2><div class="card"><div class="row"><input id="n1" placeholder="Nombre (ej. Khamrah)"><input id="n2" placeholder="Marca"><input id="n3" placeholder="Código interno"><input id="n4" type="number" step="0.01" placeholder="Precio recomendado S/"><input id="n5" type="number" placeholder="Stock mínimo" value="3"><button class="btn" style="flex:0 0 auto" onclick="addPer()">Añadir</button></div></div>
+<div class="card" style="margin-top:14px"><table><tr><th>Código</th><th>Perfume</th><th>Marca</th><th>Precio rec.</th><th>Mín.</th><th>Estado</th></tr>${S.per.map(p=>`<tr><td>${esc(p.sku)}</td><td>${esc(p.name)}</td><td>${esc(p.brand)}</td><td><input type="number" step="0.01" style="width:90px" value="${p.price/100}" onchange="setPrice('${p.id}',this.value)"></td><td>${p.min}</td><td><button class="btn g" onclick="togPer('${p.id}')">${p.active===false?'Inactivo':'Activo'}</button></td></tr>`).join('')||'<tr><td colspan=6>Catálogo vacío.</td></tr>'}</table></div>`}
+async function addPer(){const n=$('#n1').value.trim(),k=$('#n3').value.trim()||n.toUpperCase().replace(/\W/g,'').slice(0,8);if(!n)return toast('Falta el nombre');
+ await run('savePer',{per:{name:n,brand:$('#n2').value.trim(),sku:k,price:cents($('#n4').value),min:+$('#n5').value||3}},'Perfume añadido')}
+async function setPrice(id,v){await run('savePer',{per:{...tp(id),price:cents(v)}},'Precio actualizado (ventas anteriores no cambian)')}
+async function togPer(id){const p=tp(id);await run('savePer',{per:{...p,active:p.active===false}})}
+function sup(){return`<h2>Proveedores</h2><div class="card"><div class="row"><input id="s1" placeholder="Nombre comercial"><input id="s2" placeholder="País" value="EE. UU."><input id="s3" placeholder="Contacto (opcional)"><button class="btn" style="flex:0 0 auto" onclick="addSup()">Añadir</button></div></div>
+<div class="card" style="margin-top:14px"><table><tr><th>Proveedor</th><th>País</th><th>Unidades compradas</th><th>Costo medio</th></tr>${S.sup.map(s=>{const L=S.lot.filter(l=>l.sup==s.id),q=L.reduce((a,l)=>a+l.qty,0),t=L.reduce((a,l)=>a+l.buy+l.cus+l.sha+l.bcp+l.oth,0);return`<tr><td>${esc(s.name)}</td><td>${esc(s.country)}</td><td>${q}</td><td>${q?pen(t/q):'—'}</td></tr>`}).join('')||'<tr><td colspan=4>Sin proveedores.</td></tr>'}</table></div>`}
+async function addSup(){const n=$('#s1').value.trim();if(!n)return toast('Falta el nombre');await run('saveSup',{sup:{name:n,country:$('#s2').value,contact:$('#s3').value}},'Proveedor añadido')}
+/* ---- ventas ---- */
+function sell(){const opts=S.lot.filter(l=>avail(l)>0);const L=cart.map(c=>{const l=S.lot.find(x=>x.id==c.lot);if(!l||!c.qty)return null;const p=tp(l.per),pr=c.custom?cents(c.price):p.price||0;return{c,l,p,pr,u:uc(l),res:pr*c.qty-uc(l)*c.qty}}).filter(Boolean);
+ const tot=L.reduce((a,x)=>a+x.pr*x.c.qty,0),pf=L.reduce((a,x)=>a+x.res,0),paidTxt=cart.paid;
+ return`<h2>Registrar venta</h2><div class="card">${cart.map((c,i)=>`<div class="row"><select data-keep onchange="cart[${i}].lot=this.value;render()"><option value="">Perfume · proveedor…</option>${opts.map(l=>`<option value="${l.id}" ${c.lot==l.id?'selected':''}>${esc(tp(l.per).name)} — ${esc(ts(l.sup).name)} (${avail(l)} disponibles)</option>`).join('')}</select>
+ <input data-keep type="number" min="1" placeholder="Cant." value="${c.qty??''}" onchange="cart[${i}].qty=+this.value;render()" style="max-width:90px">
+ <label style="flex:0 0 auto"><input type="checkbox" data-keep ${c.custom?'checked':''} onchange="cart[${i}].custom=this.checked;render()"> Escribir precio</label>${c.custom?`<input data-keep type="number" step="0.01" placeholder="S/ unit." value="${c.price??''}" onchange="cart[${i}].price=this.value;render()" style="max-width:110px">`:''}</div>`).join('')}
+ <button class="btn g" onclick="cart.push({});render()">+ Línea</button></div>
+ ${L.length?`<div class="card" style="margin-top:14px"><table><tr><th>Perfume</th><th>Cant.</th><th>Precio</th><th>Costo real</th><th>Resultado</th></tr>${L.map(x=>`<tr><td>${esc(x.p.name)}</td><td>${x.c.qty}</td><td>${pen(x.pr)}</td><td>${pen(x.u)} <small>(compra ${pen(Math.round(x.l.buy/x.l.qty))}, desad. ${pen(Math.round(x.l.cus/x.l.qty))}, Shalom ${pen(Math.round(x.l.sha/x.l.qty))}, BCP ${pen(Math.round(x.l.bcp/x.l.qty))})</small></td><td><span class="chip ${x.res>0?'ok':x.res<0?'er':'wn'}">${x.res>0?'GANANCIA +':x.res<0?'PÉRDIDA −':'SIN GANANCIA NI PÉRDIDA '}${pen(Math.abs(x.res))}</span></td></tr>`).join('')}</table>
+ <div class="res ${pf>0?'ok':pf<0?'er':'wn'}">Total ${pen(tot)} · ${pf>0?'GANANCIA +':pf<0?'PÉRDIDA −':'SIN GANANCIA NI PÉRDIDA '}${pen(Math.abs(pf))}</div>
+ <div class="row"><input id="cu" placeholder="Cliente (opcional)"><select id="pm"><option>Efectivo</option><option>Yape</option><option>Plin</option><option>Transferencia</option><option>Tarjeta</option></select><input id="pd" type="number" step="0.01" placeholder="Pagado S/ (vacío = total)"></div>
+ <button class="btn" id="cb" onclick="confirmSale()">Confirmar venta</button></div>`:''}`}
+async function confirmSale(){const b=$('#cb');if(b.disabled)return;const items=[];let total=0,below=0;
+ for(const c of cart){if(!c.lot||!c.qty)continue;const l=S.lot.find(x=>x.id==c.lot);if(c.qty>avail(l))return toast('Stock insuficiente');const p=tp(l.per),pr=c.custom?cents(c.price):p.price||0;if(!pr)return toast('Falta el precio');if(pr<uc(l))below+=(uc(l)-pr)*c.qty;items.push({lot:l.id,qty:c.qty,price:pr});total+=pr*c.qty}
+ if(!items.length)return;if(below&&!confirm('Vendes por debajo del costo real. Pérdida prevista: '+pen(below)+'. ¿Continuar?'))return;
+ if(!confirm('¿Confirmar la venta por '+pen(total)+'?'))return;b.disabled=true;cart.idem=cart.idem||crypto.randomUUID();
+ try{const j=await run('sell',{idem:cart.idem,items,cust:$('#cu').value.trim(),pay:$('#pm').value,paid:$('#pd').value===''?null:cents($('#pd').value),belowOk:below>0});cart=[{}];toast('Venta '+j.code+' registrada');receipt(j.code)}catch(e){b.disabled=false}}
+/* ---- historial y boleta ---- */
+function hist(){return`<h2>Historial de ventas</h2><div class="card"><input data-keep placeholder="Buscar código, cliente o perfume…" oninput="flh(this.value)" style="width:100%;margin-bottom:10px"><table id="ht"><tr><th>Código</th><th>Fecha</th><th>Cliente</th><th>Productos</th><th>Total</th><th>Pendiente</th><th>Pago</th><th></th></tr>${[...S.sale].sort((a,b)=>b.at-a.at).map(s=>`<tr style="${s.status=='void'?'opacity:.5':''}"><td><b>${s.code}</b></td><td>${fd(s.at)}</td><td>${esc(s.cust)||'—'}</td><td>${s.items.map(i=>esc(i.name)+' ×'+i.qty).join(', ')}</td><td>${pen(s.total)}</td><td>${s.total-s.paid?`<span class="chip wn">${pen(s.total-s.paid)}</span>`:'—'}</td><td>${esc(s.pay)}</td><td><button class="btn g" onclick="receipt('${s.code}')">Boleta</button> ${s.status=='void'?'<span class="chip er">Anulada</span>':`<button class="btn g" onclick="voidSale('${s.code}')">Anular</button>`} ${s.ship?'<span class="chip ok">Shalom</span>':''}</td></tr>`).join('')||'<tr><td colspan=8>Aún no hay ventas.</td></tr>'}</table></div>`}
+function flh(q){q=q.toLowerCase();document.querySelectorAll('#ht tr:not(:first-child)').forEach(r=>r.style.display=r.textContent.toLowerCase().includes(q)?'':'none')}
+async function voidSale(c){if(!confirm('¿Anular la venta '+c+'? Las unidades vuelven al stock.'))return;await run('voidSale',{code:c},'Venta anulada, stock repuesto')}
+function receipt(code){const s=S.sale.find(x=>x.code==code);if(!s)return;const m=document.createElement('div');m.className='modal';m.onclick=e=>e.target==m&&m.remove();
+ m.innerHTML=`<div class="paper"><h3>JEAN PERFUMES</h3><p style="text-align:center;color:#8a7536;font-weight:600;margin:4px 0">N° ${s.code}</p><hr><small>${fd(s.at)} · ${esc(s.pay)}${s.cust?'<br>Cliente: '+esc(s.cust):''}</small><hr>
+ ${s.items.map(i=>`<div style="display:flex;justify-content:space-between;gap:8px;margin:6px 0"><span>${esc(i.name)} × ${i.qty}</span><b>${pen(i.price*i.qty)}</b></div>`).join('')}<hr><div style="display:flex;justify-content:space-between;font-size:18px"><b>TOTAL</b><b>${pen(s.total)}</b></div><p style="text-align:center;color:#777;margin-top:16px">¡Gracias por tu compra!</p>
+ <div class="row noprint"><button class="btn" onclick="window.print()">Imprimir / PDF</button><button class="btn g" style="color:#111" onclick="wa('${s.code}')">WhatsApp</button><button class="btn g" style="color:#111" onclick="shalom('${s.code}')">Recibo Shalom</button></div></div>`;document.body.append(m);render()}
+function wa(c){const s=S.sale.find(x=>x.code==c);const t=`JEAN PERFUMES — N° ${c}\n`+s.items.map(i=>`${i.name} ×${i.qty}: ${pen(i.price*i.qty)}`).join('\n')+`\nTOTAL: ${pen(s.total)}\n¡Gracias por tu compra!`;window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank')}
+function shalom(c){const s=S.sale.find(x=>x.code==c),h=s.ship||{};document.querySelectorAll('.modal').forEach(x=>x.remove());const m=document.createElement('div');m.className='modal';m.onclick=e=>e.target==m&&m.remove();
+ m.innerHTML=`<div class="paper"><h3>JEAN PERFUMES</h3><p style="text-align:center;margin:2px">Envío por Shalom · Ref. venta ${c}</p><p style="text-align:center;color:#a33;font-size:11px">Documento interno de apoyo. No es una etiqueta oficial de Shalom.</p><hr>
+ <div class="noprint"><div class="row"><input id="sh1" placeholder="Código Shalom" value="${esc(h.code)}"><input id="sh2" placeholder="Apellidos y nombres *" value="${esc(h.name)}"></div><div class="row"><input id="sh3" placeholder="DNI *" maxlength="8" value="${esc(h.dni)}"><input id="sh4" placeholder="Día de recojo *" value="${esc(h.day)}"><input id="sh5" placeholder="Sucursal *" value="${esc(h.br)}"></div><button class="btn" onclick="saveShip('${c}')">Guardar y ver</button></div>
+ ${h.name?`<div id="sp"><p>Destinatario: <b>${esc(h.name)}</b><br>DNI: <b>${esc(h.dni)}</b><br>Código: <b>${esc(h.code)||'—'}</b><br>Sucursal: <b>${esc(h.br)}</b><br>Recojo: <b>${esc(h.day)}</b></p><button class="btn noprint" onclick="window.print()">Imprimir / PDF</button></div>`:''}</div>`;document.body.append(m)}
+async function saveShip(c){const g=i=>$('#sh'+i).value.trim();if(!g(2)||!/^\d{8}$/.test(g(3))||!g(4)||!g(5))return toast('Completa nombre, DNI (8 dígitos), día y sucursal');await run('saveShip',{code:c,ship:{code:g(1),name:g(2),dni:g(3),day:g(4),br:g(5)}});shalom(c)}
+/* ---- reportes ---- */
+function rep(){const now=new Date(),ym=view_ym||now.toISOString().slice(0,7);const ss=S.sale.filter(s=>sold(s)&&new Date(s.at).toISOString().slice(0,7)==ym);const sum=f=>ss.reduce((a,s)=>a+f(s),0);
+ const by={};ss.forEach(s=>s.items.forEach(i=>{const r=by[i.name]||(by[i.name]={q:0,v:0,c:0});r.q+=i.qty;r.v+=i.price*i.qty;r.c+=i.cost*i.qty}));
+ const lots=S.lot.filter(l=>new Date(l.date).toISOString().slice(0,7)==ym),g=f=>lots.reduce((a,l)=>a+f(l),0);
+ return`<h2>Reportes</h2><div class="card"><input type="month" value="${ym}" onchange="view_ym=this.value;render()"> <span style="color:var(--mu)">Solo muestra el mes elegido; nada se borra.</span></div>
+ <div class="grid k" style="margin-top:14px">${[['Ventas',pen(sum(s=>s.total))],['Cobrado',pen(sum(s=>s.paid))],['Pendiente',pen(sum(s=>s.total-s.paid))],['Costo vendido',pen(sum(s=>s.cost))],['Ganancia bruta',pen(sum(s=>s.profit))],['Compras (costo total)',pen(g(l=>l.buy))],['Desaduanaje',pen(g(l=>l.cus))],['Shalom',pen(g(l=>l.sha))],['Comisiones BCP',pen(g(l=>l.bcp))]].map(([a,b])=>`<div class="card kpi"><small>${a}</small><b>${b}</b></div>`).join('')}</div>
+ <div class="card" style="margin-top:14px"><table><tr><th>Perfume</th><th>Unidades</th><th>Vendido</th><th>Ganancia</th></tr>${Object.entries(by).map(([n,r])=>`<tr><td>${esc(n)}</td><td>${r.q}</td><td>${pen(r.v)}</td><td><span class="chip ${r.v-r.c>=0?'ok':'er'}">${r.v-r.c>=0?'+':'−'}${pen(Math.abs(r.v-r.c))}</span></td></tr>`).join('')||'<tr><td colspan=4>Sin movimientos en este mes.</td></tr>'}</table>
+ <p style="color:var(--mu)">Ganancia bruta = precio cobrado − costo real del lote vendido. Las compras del mes no se restan: parte sigue en inventario.</p><button class="btn g" onclick="csv('${ym}')">Exportar CSV</button></div>`}
+let view_ym='';
+function csv(ym){const r=[['codigo','fecha','cliente','total','pagado','ganancia']];S.sale.filter(s=>new Date(s.at).toISOString().slice(0,7)==ym).forEach(s=>r.push([s.code,fd(s.at),s.cust,s.total/100,s.paid/100,s.profit/100]));
+ const t=r.map(x=>x.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n');const go=async()=>{try{const d=await claude.use('downloads');if(d){await d.save({filename:'ventas-'+ym+'.csv',data:t});return}}catch{}const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/csv'}));a.download='ventas-'+ym+'.csv';a.click()};go()}
+/* ---- ajustes ---- */
+function cfg(){return`<h2>Ajustes</h2><div class="card"><b>Usuario y contraseña</b><div class="row"><input id="au" placeholder="Nuevo usuario" value="${esc(getAuth()?.user||'Jean')}"><input id="ap" type="password" placeholder="Nueva contraseña (mín. 8)"><button class="btn" style="flex:0 0 auto" onclick="chPass()">Guardar</button></div><p style="color:var(--mu)">La sesión se valida en el servidor y la contraseña se guarda con hash bcrypt.</p></div>
+<div class="card" style="margin-top:14px"><button class="btn g" onclick="api('logout').finally(()=>location.reload())">Cerrar sesión</button></div>`}
+async function chPass(){const u=$('#au').value.trim(),p=$('#ap').value;if(!u||p.length<8)return toast('Usuario requerido y contraseña de 8+ caracteres');await run('changeCreds',{user:u,pass:p},'Credenciales actualizadas')}
+init();
+</script></body></html>
