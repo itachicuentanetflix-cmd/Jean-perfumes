@@ -52,7 +52,7 @@ const getAuth=()=>null;
 function enter(must){$('#login').style.display='none';$('#app').style.display='block';if(must)view='cfg',toast('Cambia tu contraseña inicial');render()}
 async function init(){DB=true;try{const m=await api('me');if(m.ok){await load();enter(m.must)}}catch{}}
 async function login(){try{const j=await api('login',{user:$('#u').value.trim(),pass:$('#p').value});await load();enter(j.must)}catch(e){$('#le').textContent=e.message}}
-$('#lb').onclick=login;$('#p').onkeydown=e=>e.key==='Enter'&&login();
+$('#lb').onclick=login;$('#p').addEventListener('keydown',e=>{if(e.key==='Enter')login()});
 /* ---- cálculos ---- */
 function alloc(total,w){const sum=w.reduce((a,b)=>a+b,0);if(!sum||!total)return w.map(()=>0);const raw=w.map(x=>total*x/sum),fl=raw.map(Math.floor);let r=total-fl.reduce((a,b)=>a+b,0);
  raw.map((x,i)=>[i,x-fl[i]]).sort((a,b)=>b[1]-a[1]).forEach(([i])=>{if(r>0){fl[i]++;r--}});return fl}
